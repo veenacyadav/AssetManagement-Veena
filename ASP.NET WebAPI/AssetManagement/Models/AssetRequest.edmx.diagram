@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aed129d5bdba4f159515c4a057cc03e8" Name="Diagram1">
+        <EntityTypeShape EntityType="AssetModel2.AssetRequestTable" Width="1.5" PointX="5.375" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetModel2.RegisterTable" Width="1.5" PointX="1.75" PointY="0.625" IsExpanded="true" />
+        <AssociationConnector Association="AssetModel2.FK_AssetRequestTable_RegisterTable" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AssetModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AddAssetTable">
+    <Key>
+      <PropertyRef Name="AssetID" />
+    </Key>
+    <Property Name="AssetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssetName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="PricePerItem" Type="int" />
+    <Property Name="TotalPrice" Type="bigint" />
+  </EntityType>
+  <EntityType Name="AssetRequestTable">
+    <Key>
+      <PropertyRef Name="RequestID" />
+    </Key>
+    <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssetName" Type="varchar" MaxLength="50" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="EmpID" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="ManagerID" Type="int" />
+  </EntityType>
+  <EntityType Name="RegisterTable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Mobile" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Department" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_AssetRequestTable_AddAssetTable' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_AssetRequestTable_AddAssetTable" />-->
+  <Association Name="FK_AssetRequestTable_RegisterTable">
+    <End Role="RegisterTable" Type="Self.RegisterTable" Multiplicity="0..1" />
+    <End Role="AssetRequestTable" Type="Self.AssetRequestTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegisterTable">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AssetRequestTable">
+        <PropertyRef Name="ManagerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AssetModel1StoreContainer">
+    <EntitySet Name="AddAssetTable" EntityType="Self.AddAssetTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AssetRequestTable" EntityType="Self.AssetRequestTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RegisterTable" EntityType="Self.RegisterTable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AssetRequestTable_RegisterTable" Association="Self.FK_AssetRequestTable_RegisterTable">
+      <End Role="RegisterTable" EntitySet="RegisterTable" />
+      <End Role="AssetRequestTable" EntitySet="AssetRequestTable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
